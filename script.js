@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       let description = response[i].description;
       let title = response[i].title;
       products.innerHTML += `    
-          <div class="card" style="width: 26rem;">
+          <div class="card" style="width: 26rem; height:47rem">
               <img src="${response[i].image}" class="card-img-top" alt="..." data-toggle="modal" data-target="#modalId${i}">
               <div class="card-body">
                   <h5 class="card-title">${
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                   <h6 class="card-subtitle mb-2 text-body-secondary">${
                     response[i].category
                   }</h6>
-                  <p class="card-text">${
+                  <p class="card-text" data-toggle="modal" data-target="#modalId${i}">${
                     description.length > 20
                       ? description.substring(0, 60).concat("...más")
                       : description
@@ -34,32 +34,27 @@ document.addEventListener("DOMContentLoaded", async function () {
   
           <!--Modal-->
           <div class="modal fade" id="modalId${i}">
-          <div class="modal-dialog bg-sucess">
-              <div class="modal-content" style="transform: scaleX(1.4);">
+            <div class="modal-dialog bg-sucess">
+                <div class="modal-content" style="transform: scaleX(1.4);">
                   <div class="modal-header pb-2">
                       <h1 class="modal-title">${response[i].title}</h1>
                       <button type="button" class="close" data-dismiss="modal" arial-label="close">
-                          <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
                   <div class="modal-body">
                       <div class="row mt-2 p-3">
-                          <div class="col-md-6">
-                            <img src ="${
-                              response[i].image
-                            }" width ="100%" height="280px" class="rounded"/>
-                          </div>
-                          <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <img src ="${ response[i].image}" width ="100%" height="280px" class="rounded"/>
+                        </div>
+                        <div class="col-md-6"></div>
                           <p class="card-text">${response[i].description}</p>
-                          <p class="card-text mr-4 text-success"> $ ${
-                            response[i].price
-                          }</p>
-                  </div>
-              </div>
-          </div>
-          </div>
-  
-      `;
+                          <p class="card-text mr-4 text-success"> $ ${response[i].price}</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    `;
     }
   }
 
