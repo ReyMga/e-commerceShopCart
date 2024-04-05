@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       let title = response[i].title;
       products.innerHTML += `    
           <div class="card" style="width: 26rem; height:47rem">
-              <img src="${response[i].image}" class="card-img-top" alt="..." data-toggle="modal" data-target="#modalId${i}">
+              <img src="${
+                response[i].image
+              }" class="card-img-top" alt="..." data-toggle="modal" data-target="#modalId${i}">
               <div class="card-body">
                   <h5 class="card-title">${
                     title.length > 15
@@ -21,10 +23,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     response[i].category
                   }</h6>
                   <p class="card-text" data-toggle="modal" data-target="#modalId${i}">${
-                    description.length > 20
-                      ? description.substring(0, 60).concat("...más")
-                      : description
-                  }</p>
+        description.length > 20
+          ? description.substring(0, 60).concat("...más")
+          : description
+      }</p>
                   <p class="card-text mr-4 text-success"> $ ${
                     response[i].price
                   }</p>
@@ -45,11 +47,15 @@ document.addEventListener("DOMContentLoaded", async function () {
                   <div class="modal-body">
                       <div class="row mt-2 p-3">
                         <div class="col-md-6">
-                            <img src ="${ response[i].image}" width ="100%" height="280px" class="rounded"/>
+                            <img src ="${
+                              response[i].image
+                            }" width ="100%" height="280px" class="rounded"/>
                         </div>
                         <div class="col-md-6"></div>
                           <p class="card-text">${response[i].description}</p>
-                          <p class="card-text mr-4 text-success"> $ ${response[i].price}</p>
+                          <p class="card-text mr-4 text-success"> $ ${
+                            response[i].price
+                          }</p>
                         </div>
                 </div>
             </div>
