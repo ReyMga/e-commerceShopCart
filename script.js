@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", async function () {
       let title = response[i].title;
       products.innerHTML += `    
           <div class="card" style="width: 26rem; height:47rem">
-              <img src="${response[i].image}" class="card-img-top" alt="..." data-toggle="modal" data-target="#modalId${i}">
+              <img src="${
+                response[i].image
+              }" class="card-img-top" alt="..." data-toggle="modal" data-target="#modalId${i}">
               <div class="card-body">
                   <h5 class="card-title">${
                     title.length > 15
@@ -21,10 +23,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     response[i].category
                   }</h6>
                   <p class="card-text" data-toggle="modal" data-target="#modalId${i}">${
-                    description.length > 20
-                      ? description.substring(0, 60).concat("...más")
-                      : description
-                  }</p>
+        description.length > 20
+          ? description.substring(0, 60).concat("...más")
+          : description
+      }</p>
                   <p class="card-text mr-4 text-success"> $ ${
                     response[i].price
                   }</p>
@@ -35,21 +37,31 @@ document.addEventListener("DOMContentLoaded", async function () {
           <!--Modal-->
           <div class="modal fade" id="modalId${i}">
             <div class="modal-dialog bg-sucess">
-                <div class="modal-content" style="transform: scaleX(1.4);">
+                <div class="modal-content" style="transform: scaleX(1.1);">
                   <div class="modal-header pb-2">
-                      <h1 class="modal-title">${response[i].title}</h1>
-                      <button type="button" class="close" data-dismiss="modal" arial-label="close">
+                      <h5 class="modal-title" id="exampleModalLabel">${
+                        response[i].title
+                      }</h5>
+                      <button type="button" class="close custom-close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                      </button>
+                        </button>
                   </div>
                   <div class="modal-body">
-                      <div class="row mt-2 p-3">
+                    <div class="row mt-2 p-3">
                         <div class="col-md-6">
-                            <img src ="${ response[i].image}" width ="100%" height="280px" class="rounded"/>
+                            <img src ="${
+                              response[i].image
+                            }" width ="100%" height="280px" class="rounded"/>
                         </div>
                         <div class="col-md-6"></div>
-                          <p class="card-text">${response[i].description}</p>
-                          <p class="card-text mr-4 text-success"> $ ${response[i].price}</p>
+                        <p class="card-text text-dark text-justify">${
+                          response[i].description
+                        }</p>
+                        <div class="col-md-6">
+                            <p class="card-text text-success">$ ${response[i].price}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="btn btn-dark btn-block">Agregar al carrito</a>
                         </div>
                 </div>
             </div>
