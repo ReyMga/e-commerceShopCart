@@ -23,7 +23,6 @@ body {
 }
 
 .contenedor {
-  padding: 0 2rem;
   margin: 0 auto;
 }
 
@@ -31,6 +30,8 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 2rem;
+  padding: 0px 29px 3px;
+  margin-top: 45px;
 }
 
 .card:hover {
@@ -48,7 +49,7 @@ body {
 }
 
 .modal-content {
-  transform: scaleX(1.4);
+  transform: scaleX(1.1);
 }
 
 .modal-header h1 {
@@ -74,9 +75,6 @@ body {
   margin-bottom: 10px;
 }
 
-.modal-body .card-text {
-  margin-bottom: 10px;
-}
 
 .modal-body .btn-success {
   width: 150px;
@@ -101,17 +99,74 @@ body {
 }
 
 .btn.btn-dark {
-    width: calc(100% - 20px); 
-    position: absolute; 
-    bottom: 10px; 
-    left: 10px; 
+  width: calc(100% - 20px);
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
 }
 
-.card-text{
-    font-size: 14px;
+.card-text {
+  font-size: 14px;
 }
 
-.modal-header.pb-2{
-    display: flex;
-    justify-content: space-between;
+.modal-header.pb-2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar {
+  background-color: #333;
+}
+
+.navbar-brand {
+  color: #fff;
+}
+
+.nav-link {
+  color: #fff;
+}
+
+.nav-link:hover {
+  color: #ccc;
+}
+
+/* Estilos para que la barra de navegación ocupe todo el ancho */
+.container-fluid {
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0px 30px;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+.navbar-brand {
+  font-size: 24px; /* Ajustar el tamaño de la fuente */
+  color: #fff; /* Color del texto */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Agregar efecto de sombra */
+}
+
+.modal-title {
+  font-size: 24px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  text-align: center; /* Alineación del texto */
+}
+.custom-close {
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin borde */
+  font-size: 24px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  padding: 5px; /* Espacio interno */
+  transition: color 0.3s; /* Transición de color al pasar el cursor */
+}
+
+.custom-close:hover {
+  color: #ff0000; /* Cambio de color al pasar el cursor */
+}
+
+.p-3{
+    padding: 3rem !important;
 }
