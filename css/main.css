@@ -170,3 +170,8 @@ body {
 .p-3{
     padding: 3rem !important;
 }
+
+.carrito-imagen {
+  width: 100%;
+  height: auto;
+}
