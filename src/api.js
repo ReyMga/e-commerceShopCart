@@ -82,6 +82,46 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   await fetchProducts("https://fakestoreapi.com/products");
 
+  // Función para agregar un producto al carrito
+  async function agregarAlCarrito(productoId) {
+    const producto = document
+      .querySelector(`[data-product-id="${productoId}"]`)
+      .closest(".card");
+    const nombreProducto = producto.querySelector(".card-title").textContent;
+    const precioProducto = parseFloat(
+      producto.querySelector(".text-success").textContent.slice(2)
+    );
+
+    // Obtener el carrito del almacenamiento local o crear uno nuevo
+    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+
+    // Verificar si el producto ya está en el carrito
+    const productoExistente = carrito.find((item) => item.id === productoId);
+
+    if (productoExistente) {
+      // Si el producto ya está en el carrito, actualizar cantidad y precio total
+      productoExistente.cantidad += 1;
+      productoExistente.precioTotal =
+        productoExistente.cantidad * precioProducto;
+    } else {
+      // Si el producto no está en el carrito, agregarlo
+      carrito.push({
+        id: productoId,
+        nombre: nombreProducto,
+        precio: precioProducto,
+        cantidad: 1,
+        precioTotal: precioProducto,
+        imagen: producto.querySelector(".card-img-top").src,
+      });
+    }
+
+    // Guardar el carrito actualizado en el almacenamiento local
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+
+    // Actualizar el contenido del carrito
+    await actualizarContenidoCarrito();
+  }
+
   // Agregar evento de clic a los botones "Agregar al carrito"
   document.querySelectorAll(".agregar-carrito").forEach((boton) => {
     boton.addEventListener("click", async function (event) {
@@ -90,8 +130,6 @@ document.addEventListener("DOMContentLoaded", async function () {
       const productoId = this.getAttribute("data-product-id");
       // Agregar el producto al carrito
       await agregarAlCarrito(productoId);
-      // Actualizar el contenido del carrito
-      await actualizarContenidoCarrito();
     });
   });
 
@@ -103,35 +141,8 @@ document.addEventListener("DOMContentLoaded", async function () {
       const productoId = this.getAttribute("data-product-id");
       // Agregar el producto al carrito
       await agregarAlCarrito(productoId);
-      // Actualizar el contenido del carrito
-      await actualizarContenidoCarrito();
     });
   });
-
-  // Función para agregar un producto al carrito
-  async function agregarAlCarrito(productoId) {
-    // Obtener el producto correspondiente al ID
-    const producto = document
-      .querySelector(`[data-product-id="${productoId}"]`)
-      .closest(".card");
-    const nombreProducto = producto.querySelector(".card-title").textContent;
-    const precioProducto = parseFloat(
-      producto.querySelector(".text-success").textContent.slice(2)
-    );
-
-    // Obtener el carrito del almacenamiento local o crear uno nuevo
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    // Agregar el producto al carrito
-    carrito.push({
-      nombre: nombreProducto,
-      precio: precioProducto,
-      imagen: producto.querySelector(".card-img-top").src,
-    });
-
-    // Guardar el carrito actualizado en el almacenamiento local
-    localStorage.setItem("carrito", JSON.stringify(carrito));
-  }
 
   // Función para actualizar el contenido del carrito
   async function actualizarContenidoCarrito() {
@@ -141,31 +152,49 @@ document.addEventListener("DOMContentLoaded", async function () {
     const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
     // Construir el HTML para los productos en el carrito
-    const carritoHTML = carrito
-      .map(
-        (producto, index) => `
-          <div class="card mb-3" data-index="${index}">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${
-                  producto.imagen
-                }" class="img-fluid rounded-start" alt="Imagen del producto">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">${producto.nombre}</h5>
-                  <p class="card-text">$${producto.precio.toFixed(2)}</p>
-                  <button type="button" class="btn btn-danger btn-sm eliminar-producto" data-producto-index="${index}">Eliminar</button>
-                </div>
+    let carritoHTML = "";
+    let precioTotal = 0;
+    carrito.forEach((producto, index) => {
+      const precioProducto = producto.precio * producto.cantidad;
+      precioTotal += precioProducto;
+
+      carritoHTML += `
+        <div class="card mb-3">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="${
+                producto.imagen
+              }" class="img-fluid rounded-start" alt="Imagen del producto">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title">${producto.nombre}</h5>
+                <p class="card-text">Cantidad: 
+                  <button class="btn btn-sm btn-secondary mr-2" data-product-index="${index}" data-action="decrease">-</button>
+                  <span class="cantidad">${producto.cantidad}</span>
+                  <button class="btn btn-sm btn-secondary ml-2" data-product-index="${index}" data-action="increase">+</button>
+                </p>
+                <p class="card-text">Precio unitario: $${producto.precio.toFixed(
+                  2
+                )}</p>
+                <p class="card-text">Precio total: $${precioProducto.toFixed(
+                  2
+                )}</p>
+                <button type="button" class="btn btn-danger btn-sm eliminar-producto" data-producto-index="${index}">Eliminar</button>
               </div>
             </div>
           </div>
-        `
-      )
-      .join("");
+        </div>
+      `;
+    });
 
-    // Actualizar el contenido del contenedor del carrito
+    // Mostrar el contenido del carrito
     carritoContainer.innerHTML = carritoHTML;
+
+    // Mostrar el precio total
+    const precioTotalElement = document.createElement("p");
+    precioTotalElement.textContent = `Precio total: $${precioTotal.toFixed(2)}`;
+    carritoContainer.appendChild(precioTotalElement);
 
     // Agregar evento de clic a los botones de eliminar producto
     document.querySelectorAll(".eliminar-producto").forEach((boton) => {
@@ -176,6 +205,34 @@ document.addEventListener("DOMContentLoaded", async function () {
         const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
         carrito.splice(index, 1);
         localStorage.setItem("carrito", JSON.stringify(carrito));
+        // Actualizar el contenido del carrito
+        await actualizarContenidoCarrito();
+      });
+    });
+
+    // Agregar evento de clic a los botones de suma y resta de cantidad
+    document.querySelectorAll("[data-action]").forEach((button) => {
+      button.addEventListener("click", async function () {
+        const index = parseInt(this.getAttribute("data-product-index"));
+        const action = this.getAttribute("data-action");
+
+        let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+        const producto = carrito[index];
+
+        if (action === "increase") {
+          producto.cantidad++;
+        } else if (action === "decrease") {
+          if (producto.cantidad > 1) {
+            producto.cantidad--;
+          } else {
+            // Si la cantidad es 1, eliminar el producto del carrito
+            carrito.splice(index, 1);
+          }
+        }
+
+        // Actualizar el carrito en el almacenamiento local
+        localStorage.setItem("carrito", JSON.stringify(carrito));
+
         // Actualizar el contenido del carrito
         await actualizarContenidoCarrito();
       });
