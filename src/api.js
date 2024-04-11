@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   await fetchProducts("https://fakestoreapi.com/products");
 
-  // Agregar evento de clic a los botones "Agregar al carrito"
+  // Se añade evento de click a los botones "Agregar al carrito"
   document.querySelectorAll(".agregar-carrito").forEach((boton) => {
     boton.addEventListener("click", async function (event) {
       event.preventDefault();
@@ -13,31 +13,44 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   });
 
-  // Agregar evento de clic a los botones "Agregar al carrito" dentro del modal
+  // Se añade evento de click a los botones "Agregar al carrito" dentro del modal
   document.querySelectorAll(".agregar-carrito-modal").forEach((boton) => {
     boton.addEventListener("click", async function (event) {
       event.preventDefault();
       const productoId = this.getAttribute("data-product-id");
       await agregarProductoAlCarrito(productoId);
+      crearAlerta();
+      const modal = document.querySelector(".modal.show");
+      if (modal) {
+        cerrarModal(`#${modal.id}`);
+      }
     });
   });
 
-  // Mostrar el contenido del carrito al cargar la página
+  // Se muestra el contenido del carrito al cargar la página
   await actualizarContenidoCarrito();
 
-  // Obtener referencia al botón de carrito
   carritoButton = document.getElementById("carritoLink");
 
-  // Agregar eventos para abrir y cerrar modales
   agregarEventosModales();
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Evento para vaciar el carrito al realizar una compra
+    document
+      .querySelector(".btn-comprar")
+      .addEventListener("click", async function () {
+        localStorage.removeItem("carrito");
+        await actualizarContenidoCarrito();
+        setTimeout(function () {
+          alert("¡Gracias por tu compra! El carrito ha sido vaciado.");
+        }, 100);
+      });
+  });
 
   // Función para agregar un producto al carrito
   async function agregarProductoAlCarrito(productoId) {
-    // Obtener información del producto
     const producto = await obtenerInformacionProducto(productoId);
-    // Agregar el producto al carrito
     await agregarAlCarrito(producto);
-    // Actualizar el contenido del carrito
     await actualizarContenidoCarrito();
   }
 
@@ -52,12 +65,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // Función para agregar un producto al carrito
   async function agregarAlCarrito(producto) {
-    // Obtener el carrito del almacenamiento local o crear uno nuevo
     let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-
-    // Verificar si el producto ya está en el carrito
     const productoExistente = carrito.find((item) => item.id === producto.id);
-
     if (productoExistente) {
       // Si el producto ya está en el carrito, actualizar cantidad y precio total
       productoExistente.cantidad += 1;
@@ -144,7 +153,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     agregarEventosModificarCantidad();
   }
 
-  // Función para agregar eventos de clic a los botones de eliminar producto
   function agregarEventosEliminarProducto() {
     document.querySelectorAll(".eliminar-producto").forEach((boton) => {
       boton.addEventListener("click", async function () {
@@ -157,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  // Función para agregar eventos de clic a los botones de suma y resta de cantidad
+  // Función suma y resta de cantidad productos
   function agregarEventosModificarCantidad() {
     document.querySelectorAll("[data-action]").forEach((button) => {
       button.addEventListener("click", async function () {
@@ -237,7 +245,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       let description = response[i].description;
       let title = response[i].title;
       products.innerHTML += `    
-            <div class="card" style="width: 26rem; height:47rem">
+            <div class="card" style="width: 26rem; height:36rem">
                 <img src="${
                   response[i].image
                 }" class="card-img-top" alt="..." data-target="#modalId${i}">
@@ -250,17 +258,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <h6 class="card-subtitle mb-2 text-body-secondary">${
                       response[i].category
                     }</h6>
-                    <p class="card-text" data-target="#modalId${i}">${
-        description.length > 20
-          ? description.substring(0, 60).concat("...más")
-          : description
-      }</p>
-                    <p class="card-text mr-4 text-success">$ ${
-                      response[i].price
-                    }</p>
-                    <a href="#" class="btn btn-dark agregar-carrito" data-product-id="${
-                      response[i].id
-                    }">Agregar al carrito</a>
                 </div>
             </div>
     
@@ -268,21 +265,25 @@ document.addEventListener("DOMContentLoaded", async function () {
             <div class="modal fade" id="modalId${i}">
             <div class="modal-dialog bg-sucess">
               <div class="modal-content">
-                <div class="modal-header pb-2">
-                  <h5 class="modal-title" id="exampleModalLabel">${
-                    response[i].title
-                  }</h5>
-                  <button type="button" class="close custom-close" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
+              <div class="d-flex justify-content-end">
+              <button type="button" class="close custom-close" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+              </div>
                 <div class="modal-body">
                   <div class="row mt-2 p-3">
+                 
                     <div class="col-md-6">
                       <img src="${
                         response[i].image
                       }" width="100%" height="280px" class="rounded" alt="Imagen del producto">
                     </div>
+                    <div class="modal-header pb-2">
+                    <h5 class="modal-title" id="exampleModalLabel">${
+                      response[i].title
+                    }</h5>
+                    
+                  </div>
                     <div class="col-md-6"></div>
                     <p class="card-text text-dark text-justify">${
                       response[i].description
@@ -306,4 +307,45 @@ document.addEventListener("DOMContentLoaded", async function () {
       `;
     }
   }
+
+  function crearAlerta() {
+    // Crear el contenedor del toast
+    var toastContainer = document.createElement("div");
+    toastContainer.classList.add(
+      "toast-container",
+      "position-absolute",
+      "top-0",
+      "start-50",
+      "translate-middle-x"
+    );
+
+    // Crear el toast
+    var toast = document.createElement("div");
+    toast.classList.add("toast", "fade", "show", "text-bg-success");
+    toast.setAttribute("role", "alert");
+    toast.setAttribute("aria-live", "assertive");
+    toast.setAttribute("aria-atomic", "true");
+
+    // Crear el cuerpo del toast
+    var toastBody = document.createElement("div");
+    toastBody.classList.add("toast-body");
+    toastBody.classList.add("text-center"); // Centra el texto horizontalmente
+    toastBody.style.fontSize = "1.2rem"; // Establece el tamaño de fuente
+    toastBody.textContent = "Producto agregado al carrito";
+
+    // Añadir el cuerpo del toast al toast
+    toast.appendChild(toastBody);
+
+    // Añadir el toast al contenedor
+    toastContainer.appendChild(toast);
+
+    // Agregar el contenedor al documento
+    document.body.appendChild(toastContainer);
+
+    setTimeout(function () {
+      toastContainer.remove();
+    }, 2000);
+  }
+
+  
 });
