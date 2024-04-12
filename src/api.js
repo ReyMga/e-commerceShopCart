@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async function () {
+/* document.addEventListener("DOMContentLoaded", async function () {
   let products = document.querySelector(".productos");
   let carritoButton;
 
@@ -310,51 +310,51 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   }
 
-  function crearAlerta() {
-    // Crear el contenedor del toast
-    var toastContainer = document.createElement("div");
-    toastContainer.classList.add(
-      "toast-container",
-      "position-fixed",
-      "top-50",
-      "start-50",
-      "translate-middle"
-    );
-    toastContainer.style.zIndex = "1000"; // Ajustar la superposición para que aparezca por encima del resto del contenido
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ o del contenido
 
-    // Crear el toast
-    var toast = document.createElement("div");
-    toast.classList.add("toast", "fade", "show", "text-bg-success", "toast-lg"); // Agrega la clase "toast-lg" para hacer el toast más grande
-    toast.setAttribute("role", "alert");
-    toast.setAttribute("aria-live", "assertive");
-    toast.setAttribute("aria-atomic", "true");
+ 
+ 
+ lg" para hacer el toast más grande
+ 
+ 
+ 
 
-    // Crear el cuerpo del toast
-    var toastBody = document.createElement("div");
-    toastBody.classList.add("toast-body");
-    toastBody.classList.add("text-center"); // Centra el texto horizontalmente
-    toastBody.style.fontSize = "2rem"; // Ajustar el tamaño de la fuente para que sea aún más grande
-    toastBody.style.padding = "30px"; // Aumentar el espacio alrededor del texto aún más
-    toastBody.textContent = "Producto agregado al carrito";
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
-    // Agregar el icono de tilde
-    var tickIcon = document.createElement("span");
-    tickIcon.classList.add("fa", "fa-check-circle", "me-2"); // Agrega las clases del icono de tilde
-    toastBody.prepend(tickIcon); // Agrega el icono antes del texto del toast
+ 
+ 
+ 
 
-    // Añadir el cuerpo del toast al toast
-    toast.appendChild(toastBody);
+ 
+ 
 
-    // Añadir el toast al contenedor
-    toastContainer.appendChild(toast);
+ 
+ 
 
-    // Agregar el contenedor al documento
-    document.body.appendChild(toastContainer);
+ 
+ 
 
-    setTimeout(function () {
-      toastContainer.remove();
-    }, 2000);
-  }
+ 
+ 
+ 
+ 
 
 
 });
+ */
