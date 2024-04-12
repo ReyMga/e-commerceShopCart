@@ -68,6 +68,7 @@ body {
 
 .modal-body .col-md-6 {
   text-align: center;
+  margin: auto;
 }
 
 .modal-body img {
@@ -92,7 +93,7 @@ body {
 .modal-body .col-md-6 {
   text-align: center;
   margin: 0 auto;
-  width: 250px;
+  width: 270px;
 }
 
 .modal-body img {
@@ -125,6 +126,13 @@ body {
 .card-text {
   font-size: 12px;
 }
+.card-text-price {
+  font-size: 2.2em!important;
+  font-weight: bold;
+  color: #333 !important;
+  margin-top: 10px;
+  margin: auto;
+}
 
 .modal-header.pb-2 {
   display: flex;
@@ -145,12 +153,8 @@ body {
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.navbar-brand {
-  color: #fff;
-}
-
 .nav-link {
-  color: #fff;
+  color: #ff5722;
 }
 
 .nav-link:hover {
@@ -173,7 +177,6 @@ body {
 
 .navbar-brand {
   font-size: 24px;
-  color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
@@ -201,10 +204,6 @@ body {
 }
 .card-subtitle {
   font-size: 12px;
-}
-
-.p-3 {
-  padding: 3rem !important;
 }
 
 .carrito-imagen {
@@ -358,4 +357,19 @@ hr.message-inner-separator {
 .col-sm-12 {
   margin: auto;
   margin-top: 30px;
+}
+
+.navbar-brand {
+  font-family: "Open Sans Condensed", sans-serif;
+  font-size: 4rem;
+  color: #ff5722;
+  letter-spacing: -5px;
+  line-height: 50px;
+  text-align: center;
+  margin-top: 10px;
+  text-shadow: 2px 2px 4px rgba(136, 134, 134, 0.4);
+}
+
+.container {
+  color: #ff5722;
 }

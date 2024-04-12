@@ -290,7 +290,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         response[i].description
                       }</p>
                       <div class="col-md-6">
-                          <p class="card-text text-success">$ ${
+                          <p class="card-text-price text-success">$ ${
                             response[i].price
                           }</p>
                       </div>
