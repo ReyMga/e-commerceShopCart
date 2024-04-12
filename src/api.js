@@ -35,17 +35,15 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   agregarEventosModales();
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Evento para vaciar el carrito al realizar una compra
-    document
-      .querySelector(".btn-comprar")
-      .addEventListener("click", async function () {
-        localStorage.removeItem("carrito");
-        await actualizarContenidoCarrito();
-        setTimeout(function () {
-          alert("¡Gracias por tu compra! El carrito ha sido vaciado.");
-        }, 100);
-      });
+  document.getElementById("btn-comprar")
+  .addEventListener("click", async function () {
+    localStorage.removeItem("carrito");
+    await actualizarContenidoCarrito();
+    //Ocultar Carrito
+    document.getElementById("offcanvasCarrito").classList.remove("show");
+    setTimeout(function () {
+      alert("¡Gracias por tu compra! El carrito ha sido vaciado.");
+    }, 100);
   });
 
   // Función para agregar un producto al carrito
@@ -311,7 +309,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   function crearAlerta() {
-    // Crear el contenedor del toast
     var toastContainer = document.createElement("div");
     toastContainer.classList.add(
       "toast-container",
@@ -320,35 +317,26 @@ document.addEventListener("DOMContentLoaded", async function () {
       "start-50",
       "translate-middle"
     );
-    toastContainer.style.zIndex = "1000"; // Ajustar la superposición para que aparezca por encima del resto del contenido
-
-    // Crear el toast
+    toastContainer.style.zIndex = "1000"; 
+    
     var toast = document.createElement("div");
-    toast.classList.add("toast", "fade", "show", "text-bg-success", "toast-lg"); // Agrega la clase "toast-lg" para hacer el toast más grande
+    toast.classList.add("toast", "fade", "show", "text-bg-success", "toast-lg"); 
     toast.setAttribute("role", "alert");
     toast.setAttribute("aria-live", "assertive");
     toast.setAttribute("aria-atomic", "true");
 
-    // Crear el cuerpo del toast
     var toastBody = document.createElement("div");
     toastBody.classList.add("toast-body");
-    toastBody.classList.add("text-center"); // Centra el texto horizontalmente
-    toastBody.style.fontSize = "2rem"; // Ajustar el tamaño de la fuente para que sea aún más grande
-    toastBody.style.padding = "30px"; // Aumentar el espacio alrededor del texto aún más
+    toastBody.classList.add("text-center"); 
+    toastBody.style.fontSize = "2rem"; 
+    toastBody.style.padding = "30px"; 
     toastBody.textContent = "Producto agregado al carrito";
 
-    // Agregar el icono de tilde
     var tickIcon = document.createElement("span");
-    tickIcon.classList.add("fa", "fa-check-circle", "me-2"); // Agrega las clases del icono de tilde
-    toastBody.prepend(tickIcon); // Agrega el icono antes del texto del toast
-
-    // Añadir el cuerpo del toast al toast
+    tickIcon.classList.add("fa", "fa-check-circle", "me-2"); 
+    toastBody.prepend(tickIcon); 
     toast.appendChild(toastBody);
-
-    // Añadir el toast al contenedor
     toastContainer.appendChild(toast);
-
-    // Agregar el contenedor al documento
     document.body.appendChild(toastContainer);
 
     setTimeout(function () {

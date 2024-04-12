@@ -18,17 +18,17 @@ html {
 
 body {
   font-size: 1.6rem;
-  background: #232526; /* fallback for old browsers */
+  background: #232526; 
   background: -webkit-linear-gradient(
     to right,
     #414345,
     #232526
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to right,
     #414345,
     #232526
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ); 
 }
 
 .contenedor {
@@ -132,17 +132,17 @@ body {
 }
 
 .navbar {
-  background: #000000; /* fallback for old browsers */
+  background: #000000; 
   background: -webkit-linear-gradient(
     to right,
     #434343,
     #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  );
   background: linear-gradient(
     to right,
     #434343,
     #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  ); 
 }
 
 .navbar-brand {
@@ -267,17 +267,17 @@ body {
 }
 
 .bg-dark {
-  background: #000000; /* fallback for old browsers */
+  background: #000000; 
   background: -webkit-linear-gradient(
     to right,
     #434343,
     #000000
-  ); /* Chrome 10-25, Safari 5.1-6 */
+  ); 
   background: linear-gradient(
     to right,
     #434343,
     #000000
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  );
   margin-top: 5rem;
 }
 
@@ -304,7 +304,7 @@ body {
   flex-direction: row;
 }
 .nav-item {
-  padding-right: 10px; /* Espacio entre el título y el carrito */
+  padding-right: 10px; 
 }
 .navbar-toggler {
   order: -1;
