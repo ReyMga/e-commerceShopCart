@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       event.preventDefault();
       const productoId = this.getAttribute("data-product-id");
       await agregarProductoAlCarrito(productoId);
+      crearAlerta();
     });
   });
 
@@ -112,33 +113,33 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Función para generar el HTML de un producto en el carrito
   function generarHTMLProductoEnCarrito(producto, index, precioProducto) {
     return `
-      <div class="card mb-3">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="${
-              producto.imagen
-            }" class="img-fluid rounded-start" alt="Imagen del producto">
+          <div class="card mb-3">
+              <div class="row g-0">
+                  <div class="col-md-4">
+                      <img src="${
+                        producto.imagen
+                      }" class="img-fluid rounded-start" alt="Imagen del producto">
+                  </div>
+                  <div class="col-md-8">
+                      <div class="card-body">
+                          <h5 class="card-title">${producto.nombre}</h5>
+                          <p class="card-text">Cantidad: 
+                              <button class="btn btn-sm btn-secondary mr-2" data-product-index="${index}" data-action="decrease">-</button>
+                              <span class="cantidad">${producto.cantidad}</span>
+                              <button class="btn btn-sm btn-secondary ml-2" data-product-index="${index}" data-action="increase">+</button>
+                          </p>
+                          <p class="card-text">Precio unitario: $${producto.precio.toFixed(
+                            2
+                          )}</p>
+                          <p class="card-text">Precio total: $${precioProducto.toFixed(
+                            2
+                          )}</p>
+                          <button type="button" class="btn btn-danger btn-sm eliminar-producto" data-producto-index="${index}">Eliminar</button>
+                      </div>
+                  </div>
+              </div>
           </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title">${producto.nombre}</h5>
-              <p class="card-text">Cantidad: 
-                <button class="btn btn-sm btn-secondary mr-2" data-product-index="${index}" data-action="decrease">-</button>
-                <span class="cantidad">${producto.cantidad}</span>
-                <button class="btn btn-sm btn-secondary ml-2" data-product-index="${index}" data-action="increase">+</button>
-              </p>
-              <p class="card-text">Precio unitario: $${producto.precio.toFixed(
-                2
-              )}</p>
-              <p class="card-text">Precio total: $${precioProducto.toFixed(
-                2
-              )}</p>
-              <button type="button" class="btn btn-danger btn-sm eliminar-producto" data-producto-index="${index}">Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+      `;
   }
 
   // Función para mostrar el contenido del carrito
@@ -245,66 +246,67 @@ document.addEventListener("DOMContentLoaded", async function () {
       let description = response[i].description;
       let title = response[i].title;
       products.innerHTML += `    
-            <div class="card" style="width: 26rem; height:36rem">
-                <img src="${
-                  response[i].image
-                }" class="card-img-top" alt="..." data-target="#modalId${i}">
-                <div class="card-body">
-                    <h5 class="card-title">${
-                      title.length > 15
-                        ? title.substring(0, 15).concat("...")
-                        : title
-                    }</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">${
-                      response[i].category
-                    }</h6>
-                </div>
-            </div>
-    
-            <!--Modal-->
-            <div class="modal fade" id="modalId${i}">
-            <div class="modal-dialog bg-sucess">
-              <div class="modal-content">
-              <div class="d-flex justify-content-end">
-              <button type="button" class="close custom-close" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-              </button>
-              </div>
-                <div class="modal-body">
-                  <div class="row mt-2 p-3">
-                 
-                    <div class="col-md-6">
-                      <img src="${
-                        response[i].image
-                      }" width="100%" height="280px" class="rounded" alt="Imagen del producto">
-                    </div>
-                    <div class="modal-header pb-2">
-                    <h5 class="modal-title" id="exampleModalLabel">${
-                      response[i].title
-                    }</h5>
-                    
+              <div class="card" style="width: 26rem; height:36rem">
+                  <img src="${
+                    response[i].image
+                  }" class="card-img-top" alt="..." data-target="#modalId${i}">
+                  <div class="card-body">
+                      <h5 class="card-title">${
+                        title.length > 15
+                          ? title.substring(0, 15).concat("...")
+                          : title
+                      }</h5>
+                      <h6 class="card-subtitle mb-2 text-body-secondary">${
+                        response[i].category
+                      }</h6>
                   </div>
-                    <div class="col-md-6"></div>
-                    <p class="card-text text-dark text-justify">${
-                      response[i].description
-                    }</p>
-                    <div class="col-md-6">
-                      <p class="card-text text-success">$ ${
-                        response[i].price
+              </div>
+      
+              <!--Modal-->
+              <div class="modal fade" id="modalId${i}">
+              <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                  <div class="modal-content">
+                  <div class="d-flex justify-content-end">
+                  <button type="button" class="close custom-close" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                  <div class="modal-body">
+                      <div class="row mt-2 p-3">
+                  
+                      <div class="col-md-6">
+                          <img src="${
+                            response[i].image
+                          }" width="100%" height="280px" class="rounded" alt="Imagen del producto">
+                      </div>
+                      <div class="modal-header pb-2">
+                      <h5 class="modal-title" id="exampleModalLabel">${
+                        response[i].title
+                      }</h5>
+                      
+                  </div>
+                      <div class="col-md-6"></div>
+                      <p class="card-text text-dark text-justify">${
+                        response[i].description
                       }</p>
-                    </div>
-                    <div class="col-md-6">
-                      <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
-                        response[i].id
-                      }">Agregar al carrito</a>
-                    </div>
+                      <div class="col-md-6">
+                          <p class="card-text text-success">$ ${
+                            response[i].price
+                          }</p>
+                      </div>
+                      
+                      <div class="col-md-6">
+                          <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
+                            response[i].id
+                          }">Agregar al carrito</a>
+                      </div>
+                      </div>
                   </div>
-                </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          
-      `;
+              </div>
+              
+          `;
     }
   }
 
@@ -313,15 +315,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     var toastContainer = document.createElement("div");
     toastContainer.classList.add(
       "toast-container",
-      "position-absolute",
-      "top-0",
+      "position-fixed",
+      "top-50",
       "start-50",
-      "translate-middle-x"
+      "translate-middle"
     );
+    toastContainer.style.zIndex = "1000"; // Ajustar la superposición para que aparezca por encima del resto del contenido
 
     // Crear el toast
     var toast = document.createElement("div");
-    toast.classList.add("toast", "fade", "show", "text-bg-success");
+    toast.classList.add("toast", "fade", "show", "text-bg-success", "toast-lg"); // Agrega la clase "toast-lg" para hacer el toast más grande
     toast.setAttribute("role", "alert");
     toast.setAttribute("aria-live", "assertive");
     toast.setAttribute("aria-atomic", "true");
@@ -330,8 +333,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     var toastBody = document.createElement("div");
     toastBody.classList.add("toast-body");
     toastBody.classList.add("text-center"); // Centra el texto horizontalmente
-    toastBody.style.fontSize = "1.2rem"; // Establece el tamaño de fuente
+    toastBody.style.fontSize = "2rem"; // Ajustar el tamaño de la fuente para que sea aún más grande
+    toastBody.style.padding = "30px"; // Aumentar el espacio alrededor del texto aún más
     toastBody.textContent = "Producto agregado al carrito";
+
+    // Agregar el icono de tilde
+    var tickIcon = document.createElement("span");
+    tickIcon.classList.add("fa", "fa-check-circle", "me-2"); // Agrega las clases del icono de tilde
+    toastBody.prepend(tickIcon); // Agrega el icono antes del texto del toast
 
     // Añadir el cuerpo del toast al toast
     toast.appendChild(toastBody);
@@ -347,5 +356,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     }, 2000);
   }
 
-  
+
 });
