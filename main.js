@@ -41,12 +41,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   async function fetchProducts(url) {
     let data = await fetch(url);
     let response = await data.json();
-
     for (let i = 0; i < response.length; i++) {
       let description = response[i].description;
       let title = response[i].title;
       products.innerHTML += `    
-            <div class="card" style="width: 26rem; height:47rem">
+            <div class="card" style="width: 26rem; height:36rem">
                 <img src="${
                   response[i].image
                 }" class="card-img-top" alt="..." data-target="#modalId${i}">
@@ -59,63 +58,56 @@ document.addEventListener("DOMContentLoaded", async function () {
                     <h6 class="card-subtitle mb-2 text-body-secondary">${
                       response[i].category
                     }</h6>
-                    <p class="card-text" data-target="#modalId${i}">${
-        description.length > 20
-          ? description.substring(0, 60).concat("...más")
-          : description
-      }</p>
-                    <p class="card-text mr-4 text-success">$ ${
-                      response[i].price
-                    }</p>
-                    <a href="#" class="btn btn-dark agregar-carrito" data-product-id="${
-                      response[i].id
-                    }">Agregar al carrito</a>
                 </div>
             </div>
     
             <!--Modal-->
             <div class="modal fade" id="modalId${i}">
-            <div class="modal-dialog bg-sucess">
-              <div class="modal-content">
-                <div class="modal-header pb-2">
-                  <h5 class="modal-title" id="exampleModalLabel">${
-                    response[i].title
-                  }</h5>
-                  <button type="button" class="close custom-close" aria-label="Close">
+            <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                <div class="modal-content">
+                <div class="d-flex justify-content-end">
+                <button type="button" class="close custom-close" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                  </button>
+                </button>
                 </div>
                 <div class="modal-body">
-                  <div class="row mt-2 p-3">
+                    <div class="row mt-2 p-3">
+                
                     <div class="col-md-6">
-                      <img src="${
-                        response[i].image
-                      }" width="100%" height="280px" class="rounded" alt="Imagen del producto">
+                        <img src="${
+                          response[i].image
+                        }" width="100%" height="280px" class="rounded" alt="Imagen del producto">
                     </div>
+                    <div class="modal-header pb-2">
+                    <h5 class="modal-title" id="exampleModalLabel">${
+                      response[i].title
+                    }</h5>
+                    
+                </div>
                     <div class="col-md-6"></div>
                     <p class="card-text text-dark text-justify">${
                       response[i].description
                     }</p>
                     <div class="col-md-6">
-                      <p class="card-text text-success">$ ${
-                        response[i].price
-                      }</p>
+                        <p class="card-text text-success">$ ${
+                          response[i].price
+                        }</p>
                     </div>
+                    
                     <div class="col-md-6">
-                      <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
-                        response[i].id
-                      }">Agregar al carrito</a>
+                        <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
+                          response[i].id
+                        }">Agregar al carrito</a>
                     </div>
-                  </div>
+                    </div>
                 </div>
-              </div>
+                </div>
             </div>
-          </div>
-          
-      `;
+            </div>
+            
+        `;
     }
   }
-
   // Agregar eventos de apertura y cierre de modales
   function agregarEventosModales() {
     document.querySelectorAll("[data-target]").forEach((boton) => {
