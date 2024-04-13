@@ -35,17 +35,15 @@
 
   agregarEventosModales();
 
-  document.addEventListener("DOMContentLoaded", function () {
-    // Evento para vaciar el carrito al realizar una compra
-    document
-      .querySelector(".btn-comprar")
-      .addEventListener("click", async function () {
-        localStorage.removeItem("carrito");
-        await actualizarContenidoCarrito();
-        setTimeout(function () {
-          alert("¡Gracias por tu compra! El carrito ha sido vaciado.");
-        }, 100);
-      });
+  document.getElementById("btn-comprar")
+  .addEventListener("click", async function () {
+    localStorage.removeItem("carrito");
+    await actualizarContenidoCarrito();
+    //Ocultar Carrito
+    document.getElementById("offcanvasCarrito").classList.remove("show");
+    setTimeout(function () {
+      alert("¡Gracias por tu compra! El carrito ha sido vaciado.");
+    }, 100);
   });
 
   // Función para agregar un producto al carrito
@@ -310,51 +308,40 @@
     }
   }
 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- o del contenido
+  function crearAlerta() {
+    var toastContainer = document.createElement("div");
+    toastContainer.classList.add(
+      "toast-container",
+      "position-fixed",
+      "top-50",
+      "start-50",
+      "translate-middle"
+    );
+    toastContainer.style.zIndex = "1000"; 
+    
+    var toast = document.createElement("div");
+    toast.classList.add("toast", "fade", "show", "text-bg-success", "toast-lg"); 
+    toast.setAttribute("role", "alert");
+    toast.setAttribute("aria-live", "assertive");
+    toast.setAttribute("aria-atomic", "true");
 
- 
- 
- lg" para hacer el toast más grande
- 
- 
- 
+    var toastBody = document.createElement("div");
+    toastBody.classList.add("toast-body");
+    toastBody.classList.add("text-center"); 
+    toastBody.style.fontSize = "2rem"; 
+    toastBody.style.padding = "30px"; 
+    toastBody.textContent = "Producto agregado al carrito";
 
- 
- 
- 
- 
- 
- 
- 
+    var tickIcon = document.createElement("span");
+    tickIcon.classList.add("fa", "fa-check-circle", "me-2"); 
+    toastBody.prepend(tickIcon); 
+    toast.appendChild(toastBody);
+    toastContainer.appendChild(toast);
+    document.body.appendChild(toastContainer);
 
- 
- 
- 
-
- 
- 
-
- 
- 
-
- 
- 
-
- 
- 
- 
- 
-
+    setTimeout(function () {
+      toastContainer.remove();
+    }, 2000);
+  }
 
 });
- */
