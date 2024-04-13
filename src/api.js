@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", async function () {
+/* document.addEventListener("DOMContentLoaded", async function () {
   let products = document.querySelector(".productos");
   let carritoButton;
 
@@ -343,6 +343,5 @@ document.addEventListener("DOMContentLoaded", async function () {
       toastContainer.remove();
     }, 2000);
   }
-
 
 });
