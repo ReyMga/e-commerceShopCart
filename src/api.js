@@ -1,4 +1,4 @@
-/* document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", async function () {
   let products = document.querySelector(".productos");
   let carritoButton;
 

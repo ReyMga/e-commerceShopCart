@@ -15,4 +15,3 @@ export function cerrarModal(modalId) {
   modal.removeAttribute("role");
 }
 
-// Otras funciones relacionadas con modales...
