@@ -31,9 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   // Mostrar el contenido del carrito al cargar la página
   await actualizarContenidoCarrito();
 
-  // Obtener referencia al botón de carrito
-  carritoButton = document.getElementById("carritoLink");
-
   // Agregar eventos para abrir y cerrar modales
   agregarEventosModales();
 
