@@ -12,4 +12,5 @@ export function cerrarModal(modalId) {
   modal.classList.remove("show");
   modal.style.display = "none";
   modal.removeAttribute("aria-modal");
+  modal.removeAttribute("role");
 }
