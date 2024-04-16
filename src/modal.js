@@ -51,42 +51,14 @@ export function agregarEventosModales() {
   });
 }
 
- /**
+/**
  * Función que crea el alerta o toast al agregar un producto al Carrito
  *  * @returns {void}
  */
- export function crearAlerta() {
-  var toastContainer = document.createElement("div");
-  toastContainer.classList.add(
-    "toast-container",
-    "position-fixed",
-    "top-50",
-    "start-50",
-    "translate-middle"
-  );
-  toastContainer.style.zIndex = "1000"; 
-  
-  var toast = document.createElement("div");
-  toast.classList.add("toast", "fade", "show", "text-bg-success", "toast-lg"); 
-  toast.setAttribute("role", "alert");
-  toast.setAttribute("aria-live", "assertive");
-  toast.setAttribute("aria-atomic", "true");
-
-  var toastBody = document.createElement("div");
-  toastBody.classList.add("toast-body");
-  toastBody.classList.add("text-center"); 
-  toastBody.style.fontSize = "2rem"; 
-  toastBody.style.padding = "30px"; 
-  toastBody.textContent = "Producto agregado al carrito";
-
-  var tickIcon = document.createElement("span");
-  tickIcon.classList.add("fa", "fa-check-circle", "me-2"); 
-  toastBody.prepend(tickIcon); 
-  toast.appendChild(toastBody);
-  toastContainer.appendChild(toast);
-  document.body.appendChild(toastContainer);
-
-  setTimeout(function () {
-    toastContainer.remove();
-  }, 2000);
+export function crearAlerta() {
+  Swal.fire({
+    title: "Agregado!",
+    text: "Tu producto se ha agregado al carrito!",
+    icon: "success",
+  });
 }

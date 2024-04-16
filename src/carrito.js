@@ -1,13 +1,53 @@
+//import Swal from "sweetalert2/dist/sweetalert2.js";
+
 document.addEventListener("DOMContentLoaded", async function () {
-  document.getElementById("btn-comprar").addEventListener("click", async function () {
-    localStorage.removeItem("carrito");
-    await actualizarContenidoCarrito();
-    document.getElementById("offcanvasCarrito").classList.remove("show");
-    setTimeout(function () {
-      alert("¡Gracias por tu compra! El carrito ha sido vaciado.");
-    }, 100);
-  });
+  document
+    .getElementById("btn-comprar")
+    .addEventListener("click", async function () {
+      localStorage.removeItem("carrito");
+      await actualizarContenidoCarrito();
+      document.getElementById("offcanvasCarrito").classList.remove("show");
+      alertCorrecto();
+    });
 });
+//alert para comprar
+function alertCorrecto() {
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
+
+  Toast.fire({
+    icon: "success",
+    title: "La compra se ha realizado con exito!!!",
+  });
+}
+async function alertEliminar(index) {
+  const result = await Swal.fire({
+    title: "Desea eliminar este producto del carrito?",
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Si",
+    denyButtonText: `No`,
+  });
+
+  if (result.isConfirmed) {
+    Swal.fire("Producto eliminado!", "", "success");
+    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+    carrito.splice(index, 1);
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    await actualizarContenidoCarrito();
+  } else if (result.isDenied) {
+    Swal.fire("No se elimino el producto", "", "info");
+  }
+}
 
 // Definir la variable products antes de llamar a fetchProducts
 let products = document.querySelector(".productos");
@@ -44,7 +84,7 @@ function generarHTMLProductoEnCarrito(producto, index, precioProducto) {
       `;
 }
 
- /**
+/**
  * Función para obtener y mostrar los productos
  * @param {url} a - Url de la api a llamar
  * @returns {void}
@@ -154,15 +194,11 @@ function mostrarContenidoCarrito(carritoContainer, carritoHTML, precioTotal) {
   agregarEventosEliminarProducto();
   agregarEventosModificarCantidad();
 }
-
 function agregarEventosEliminarProducto() {
   document.querySelectorAll(".eliminar-producto").forEach((boton) => {
     boton.addEventListener("click", async function () {
       const index = parseInt(this.getAttribute("data-producto-index"));
-      const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-      carrito.splice(index, 1);
-      localStorage.setItem("carrito", JSON.stringify(carrito));
-      await actualizarContenidoCarrito();
+      await alertEliminar(index);
     });
   });
 }
@@ -190,28 +226,28 @@ export async function actualizarContenidoCarrito() {
 
 // Función para agregar un producto al carrito
 export async function agregarAlCarrito(producto) {
-    let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    const productoExistente = carrito.find((item) => item.id === producto.id);
-    if (productoExistente) {
-      // Si el producto ya está en el carrito, actualizar cantidad y precio total
-      productoExistente.cantidad += 1;
-      productoExistente.precioTotal =
-        productoExistente.cantidad * producto.precio;
-    } else {
-      // Si el producto no está en el carrito, agregarlo
-      carrito.push({
-        id: producto.id,
-        nombre: producto.title,
-        precio: producto.price,
-        cantidad: 1,
-        precioTotal: producto.price,
-        imagen: producto.image,
-      });
-    }
-
-    // Guardar el carrito actualizado en el almacenamiento local
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+  let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  const productoExistente = carrito.find((item) => item.id === producto.id);
+  if (productoExistente) {
+    // Si el producto ya está en el carrito, actualizar cantidad y precio total
+    productoExistente.cantidad += 1;
+    productoExistente.precioTotal =
+      productoExistente.cantidad * producto.precio;
+  } else {
+    // Si el producto no está en el carrito, agregarlo
+    carrito.push({
+      id: producto.id,
+      nombre: producto.title,
+      precio: producto.price,
+      cantidad: 1,
+      precioTotal: producto.price,
+      imagen: producto.image,
+    });
   }
+
+  // Guardar el carrito actualizado en el almacenamiento local
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 
 // Llamar a fetchProducts después de definir la variable products
 fetchProducts("https://fakestoreapi.com/products");

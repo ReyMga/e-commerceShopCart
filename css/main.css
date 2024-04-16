@@ -359,3 +359,7 @@ hr.message-inner-separator {
   margin: auto;
   margin-top: 30px;
 }
+div.offcanvas-body{
+  color: #d3d3d3;
+  font-size: 16px;
+}
