@@ -32,6 +32,7 @@ function alertCorrecto() {
 async function alertEliminar(index) {
   const result = await Swal.fire({
     title: "Desea eliminar este producto del carrito?",
+    icon: "warning",
     showDenyButton: true,
     showCancelButton: true,
     confirmButtonText: "Si",
