@@ -45,6 +45,7 @@ async function alertEliminar(index) {
     carrito.splice(index, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     await actualizarContenidoCarrito();
+    actualizarEstadoBotonComprar(); 
   } else if (result.isDenied) {
     Swal.fire("No se elimino el producto", "", "info");
   }
@@ -180,6 +181,7 @@ function agregarEventosModificarCantidad() {
 
       localStorage.setItem("carrito", JSON.stringify(carrito));
       await actualizarContenidoCarrito();
+      actualizarEstadoBotonComprar(); 
     });
   });
 }
@@ -190,6 +192,7 @@ function mostrarContenidoCarrito(carritoContainer, carritoHTML, precioTotal) {
 
   const precioTotalElement = document.createElement("p");
   precioTotalElement.textContent = `Precio total: $${precioTotal.toFixed(2)}`;
+  precioTotalElement.classList.add("precio-total");
   carritoContainer.appendChild(precioTotalElement);
 
   agregarEventosEliminarProducto();
@@ -223,6 +226,15 @@ export async function actualizarContenidoCarrito() {
   });
 
   mostrarContenidoCarrito(carritoContainer, carritoHTML, precioTotal);
+  actualizarEstadoBotonComprar();
+
+  // Ocultar el precio total si el carrito está vacío
+  const precioTotalElement = document.querySelector(".precio-total");
+  if (carrito.length === 0) {
+    precioTotalElement.style.display = "none";
+  } else {
+    precioTotalElement.style.display = "block";
+  }
 }
 
 // Función para agregar un producto al carrito
@@ -234,6 +246,8 @@ export async function agregarAlCarrito(producto) {
     productoExistente.cantidad += 1;
     productoExistente.precioTotal =
       productoExistente.cantidad * producto.precio;
+    await agregarAlCarrito(producto);
+    actualizarEstadoBotonComprar();
   } else {
     // Si el producto no está en el carrito, agregarlo
     carrito.push({
@@ -246,9 +260,30 @@ export async function agregarAlCarrito(producto) {
     });
   }
 
-  // Guardar el carrito actualizado en el almacenamiento local
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
-// Llamar a fetchProducts después de definir la variable products
+const botonComprar = document.getElementById("btn-comprar");
+
+// Función para verificar si el carrito está vacío
+function carritoEstaVacio() {
+  const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+  return carrito.length === 0;
+}
+
+// Función para habilitar o deshabilitar el botón de comprar según el estado del carrito
+function actualizarEstadoBotonComprar() {
+  if (carritoEstaVacio()) {
+    // Si el carrito está vacío, deshabilito el botón
+    botonComprar.setAttribute("disabled", "true");
+  } else {
+    // Si el carrito no está vacío, habilito el botón
+    botonComprar.removeAttribute("disabled");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  actualizarEstadoBotonComprar();
+});
+
 fetchProducts("https://fakestoreapi.com/products");
