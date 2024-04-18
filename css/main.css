@@ -18,17 +18,9 @@ html {
 
 body {
   font-size: 1.6rem;
-  background: #232526; 
-  background: -webkit-linear-gradient(
-    to right,
-    #414345,
-    #232526
-  );
-  background: linear-gradient(
-    to right,
-    #414345,
-    #232526
-  ); 
+  background: #232526;
+  background: -webkit-linear-gradient(to right, #414345, #232526);
+  background: linear-gradient(to right, #414345, #232526);
 }
 
 .contenedor {
@@ -132,17 +124,9 @@ body {
 }
 
 .navbar {
-  background: #000000; 
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  );
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); 
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  background: linear-gradient(to right, #434343, #000000);
 }
 
 .navbar-brand {
@@ -267,24 +251,18 @@ body {
 }
 
 .bg-dark {
-  background: #000000; 
-  background: -webkit-linear-gradient(
-    to right,
-    #434343,
-    #000000
-  ); 
-  background: linear-gradient(
-    to right,
-    #434343,
-    #000000
-  );
+  background: #000000;
+  background: -webkit-linear-gradient(to right, #434343, #000000);
+  background: linear-gradient(to right, #434343, #000000);
   margin-top: 5rem;
 }
 
 .d-flex {
   padding-right: 12px;
 }
-
+.title {
+  display: contents;
+}
 .logo-container {
   text-align: center;
 }
@@ -303,9 +281,7 @@ body {
 .navbar-nav {
   flex-direction: row;
 }
-.nav-item {
-  padding-right: 10px; 
-}
+
 .navbar-toggler {
   order: -1;
 }
@@ -355,14 +331,40 @@ hr.message-inner-separator {
   );
 }
 
+.collapse {
+  margin-right: 40px;
+}
+.subtitle {
+  margin: auto;
+  color: white;
+}
 .col-sm-12 {
   margin: auto;
   margin-top: 30px;
 }
-div.offcanvas-body{
+div.offcanvas-body {
   color: #d3d3d3;
   font-size: 16px;
 }
+
+.circle-icon {
+  position: absolute;
+  top: 45%;
+  margin-left: 16px;
+}
+.count-products {
+  position: absolute;
+  top: 21%;
+  right: 3px;
+  color: #000;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
 .card {
   transition: box-shadow 0.3s, transform 0.3s;
 }
