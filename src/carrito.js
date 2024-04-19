@@ -261,6 +261,8 @@ export async function agregarAlCarrito(producto) {
 }
 
 const botonComprar = document.getElementById("btn-comprar");
+const btnEliminarTodo = document.getElementById("btn-eliminar");
+
 
 function carritoEstaVacio() {
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
@@ -270,14 +272,15 @@ function carritoEstaVacio() {
 function actualizarEstadoBotonComprar() {
   if (carritoEstaVacio()) {
     botonComprar.setAttribute("disabled", "true");
+    btnEliminarTodo.setAttribute("disabled", "true");
   } else {
     botonComprar.removeAttribute("disabled");
+    btnEliminarTodo.removeAttribute("disabled");
   }
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
   await actualizarContenidoCarrito();
-  const btnEliminarTodo = document.getElementById("btn-eliminar");
   btnEliminarTodo.addEventListener("click", eliminarTodoDelCarrito);
   botonComprar.addEventListener("click", alertCorrecto);
 });
