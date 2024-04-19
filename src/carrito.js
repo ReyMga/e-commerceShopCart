@@ -54,10 +54,28 @@ function alertCorrecto() {
     icon: "success",
     title: "La compra se ha realizado con éxito!!!",
   });
-  // Eliminar el carrito después de la compra
   localStorage.removeItem("carrito");
-  // Actualizar el contenido del carrito
   actualizarContenidoCarrito();
+}
+
+function eliminarTodoDelCarrito() {
+  Swal.fire({
+    title: "Desea eliminar todos los productos del carrito?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Si",
+    cancelButtonText: "Cancelar"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire("Todos los productos han sido eliminados del carrito", "", "success");
+      localStorage.removeItem("carrito");
+      actualizarContenidoCarrito();
+      actualizarEstadoBotonComprar();
+      actualizarContadorProductos(); 
+    } else {
+      Swal.fire("Operación cancelada", "", "info");
+    }
+  });
 }
 
 async function alertEliminar(index) {
@@ -259,6 +277,8 @@ function actualizarEstadoBotonComprar() {
 
 document.addEventListener("DOMContentLoaded", async function () {
   await actualizarContenidoCarrito();
+  const btnEliminarTodo = document.getElementById("btn-eliminar");
+  btnEliminarTodo.addEventListener("click", eliminarTodoDelCarrito);
   botonComprar.addEventListener("click", alertCorrecto);
 });
 

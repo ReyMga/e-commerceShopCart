@@ -352,6 +352,11 @@ div.offcanvas-body {
   top: 45%;
   margin-left: 16px;
 }
+
+.btn-eliminar {
+  padding: 10px 20px;
+  font-size: 16px;
+}
 .count-products {
   position: absolute;
   top: 21%;
@@ -369,8 +374,7 @@ div.offcanvas-body {
   transition: box-shadow 0.3s, transform 0.3s;
 }
 .card:hover {
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1), 0 0 0 5px rgba(219, 211, 211, 0.5); /* Sombras combinadas: una oscura y una blanca */
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1),
+    0 0 0 5px rgba(219, 211, 211, 0.5); /* Sombras combinadas: una oscura y una blanca */
   transform: translateY(-3px); /* Mover la tarjeta ligeramente hacia arriba */
 }
-
-
