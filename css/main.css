@@ -24,8 +24,9 @@ body {
 .navbar {
   background: linear-gradient(to right, #434343, #000000);
   display: flex;
-  justify-content: space-between; 
-  padding: 10px; 
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; 
 }
 
 .navbar-toggler {
@@ -36,11 +37,14 @@ body {
   font-size: 24px;
   color: #fff;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 .navbar-nav {
-  flex-direction: row;
-  justify-content: flex-end; 
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .nav-link {
@@ -62,6 +66,10 @@ body {
     height: 65vh;
     min-height: 300px;
   }
+  .container {
+    padding: 5px;
+    max-width: 390px;  
+  }
 }
 
 @media (min-width: 1024px) {
@@ -69,17 +77,24 @@ body {
     height: 75vh;
     min-height: 350px;
   }
+  .container {
+    padding: 5px;
+    max-width: 768px;  
+  }
 }
 
-.contenedor {
-  margin: 0 auto;
+.container {
+  width: 100%; 
+  padding: 10px;  
+  margin: 0 auto;  
+  max-width: 1200px;  
 }
 
 .productos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 2rem;
-  padding: 0 29px;
+  padding: 0 20px; 
   margin-top: 45px;
 }
 
@@ -90,7 +105,7 @@ body {
 .card:hover {
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1),
     0 0 0 5px rgba(219, 211, 211, 0.5);
-  transform: translateY(-3px); 
+  transform: translateY(-3px);
 }
 
 .card-img-top {
@@ -104,7 +119,7 @@ body {
 .carrito {
   background: #000000;
   color: #fff;
-  width: 300px; 
+  width: 300px;
   padding: 20px;
 }
 
@@ -146,15 +161,15 @@ body {
 }
 
 .circle-icon {
-  position: relative;
-  top: 45%;
+  position: absolute;
+  top: 45%; 
   right: 3px; 
 }
 
 .count-products {
-  position: relative;
-  top: -15px;
-  right: -15px;
+  position: absolute;
+  top: 21%;
+  right: 3px;
   color: #000;
   width: 18px;
   height: 18px;
@@ -194,30 +209,10 @@ body {
 .custom-close:hover {
   color: #ff0000;
 }
+
 #carritoLink {
-  position: relative;
-  display: block;
-  font-size: 24px;
+  position: absolute; 
   top: 0;
   right: 0;
   margin-right: 20px; 
-}
-
-.circle-icon {
-  position: absolute;
-  top: 45%;
-  right: 3px; 
-}
-
-.count-products {
-  position: absolute;
-  top: 21%;
-  right: 3px;
-  color: #000;
-  width: 18px;
-  height: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
 }
