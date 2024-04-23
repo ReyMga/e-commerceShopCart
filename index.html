@@ -29,144 +29,122 @@
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
       <div class="container">
         <div class="title">
-          <a
-            class="navbar-brand"
-            href="#"
-            style="display: block; margin: 0 auto"
-            >DIGITAL STORE</a
-          >
+          <a class="navbar-brand" href="#">DIGITAL STORE</a>
         </div>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a
-                id="carritoLink"
-                class="nav-link"
-                href="#"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasCarrito"
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a
+              id="carritoLink"
+              class="nav-link"
+              href="#"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasCarrito"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                opacity="1"
+                color="white"
+                fill="currentColor"
+                class="bi bi-cart me-1"
+                viewBox="0 0 16 16"
               >
+                <path
+                  d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
+                ></path>
+              </svg>
+              <div class="circle-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  opacity="1"
-                  color="white" 
-                  fill="currentColor"
-                  class="bi bi-cart me-1"
-                  viewBox="0 0 16 16"
+                  width="24"
+                  height="24"
+                  fill="#ffffff"
+                  viewBox="0 0 24 24"
                 >
-                  <path
-                    d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"
-                  />
+                  <circle cx="12" cy="12" r="10.5"></circle>
                 </svg>
-                <div class="circle-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="#ffffff"
-                    viewBox="0 0 24 24"
-                  >
-                    <circle cx="12" cy="12" r="10.5" />
-                  </svg>
-                  <div class="count-products">
-                    <span id="contador-productos">0</span>
-                  </div>
+                <div class="count-products">
+                  <span id="contador-productos">0</span>
                 </div>
-              </a>
-            </li>
-            <h4 class="subtitle">Mi Carrito</h4s>
-
-          </ul>
-        </div>
+              </div>
+            </a>
+          </li>
+          <h4 class="subtitle">Mi Carrito</h4>
+        </ul>
       </div>
     </nav>
 
     <header>
       <div
-      id="carouselExampleCaptions"
-      class="carousel slide"
-      data-bs-ride="carousel"
-    >
-      <div class="carousel-indicators">
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="0"
-          class="active"
-          aria-current="true"
-          aria-label="Slide 1"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="1"
-          aria-label="Slide 2"
-        ></button>
-        <button
-          type="button"
-          data-bs-target="#carouselExampleCaptions"
-          data-bs-slide-to="2"
-          aria-label="Slide 3"
-        ></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img
-            src="./img/slider1.png"
-            srcset="./img/slider1-small.jpg 390w, ./img/slider1-medium.jpg 768w, ./img/slider1-large.png 1440w"
-            sizes="(max-width: 390px) 100vw, (max-width: 768px) 80vw, 100vw"
-            class="d-block w-100"
-            alt="Slider 1"
-          />
-          <div class="carousel-caption"></div>
-        </div>
-        <div class="carousel-item">
-          <img
-            src="./img/slider2.png"
-            srcset="./img/slider2-small.png 390w, ./img/slider2-medium.jpeg 768w, ./img/slider2-large.png 1440w"
-            sizes="(max-width: 390px) 100vw, (max-width: 768px) 80vw, 100vw"
-            class="d-block w-100"
-            alt="Slider 2"
-          />
-          <div class="carousel-caption"></div>
-        </div>
-        <div class="carousel-item">
-          <img
-            src="./img/slider3.png"
-            srcset="./img/slider3-small.png 390w, ./img/slider3-medium.jpg 768w, ./img/slider3-large.png 1440w"
-            sizes="(max-width: 390px) 100vw, (max-width: 768px) 80vw, 100vw"
-            class="d-block w-100"
-            alt="Slider 3"
-          />
-          <div class="carousel-caption"></div>
-        </div>
-      </div>
-      <button
-        class="carousel-control-prev"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="prev"
+        id="carouselExampleCaptions"
+        class="carousel slide"
+        data-bs-ride="carousel"
       >
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button
-        class="carousel-control-next"
-        type="button"
-        data-bs-target="#carouselExampleCaptions"
-        data-bs-slide="next"
-      >
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next"
-      ></span>
-      </button>
-    </div>
-    
+        <div class="carousel-indicators">
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="Slide 1"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="1"
+            aria-label="Slide 2"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleCaptions"
+            data-bs-slide-to="2"
+            aria-label="Slide 3"
+          ></button>
+        </div>
+        <div class="carousel-inner">
+          <div
+            class="carousel-item active"
+            style="background-image: url('./img/slider1-large.png')"
+          >
+            <div class="carousel-caption"></div>
+          </div>
+          <div
+            class="carousel-item"
+            style="background-image: url('./img/slider2-large.png')"
+          >
+            <div class="carousel-caption"></div>
+          </div>
+          <div
+            class="carousel-item"
+            style="background-image: url('./img/slider3-large.png')"
+          >
+            <div class="carousel-caption"></div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleCaptions"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -209,7 +187,11 @@
         <div class="offcanvas-body">
           <p>Contenido de carrito</p>
         </div>
-        <button type="button" class="btn btn-danger btn-lg btn-eliminar" id="btn-eliminar">
+        <button
+          type="button"
+          class="btn btn-danger btn-lg btn-eliminar"
+          id="btn-eliminar"
+        >
           Eliminar todo
         </button>
         <button
