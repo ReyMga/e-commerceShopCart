@@ -64,14 +64,18 @@ function eliminarTodoDelCarrito() {
     icon: "warning",
     showCancelButton: true,
     confirmButtonText: "Si",
-    cancelButtonText: "Cancelar"
+    cancelButtonText: "Cancelar",
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire("Todos los productos han sido eliminados del carrito", "", "success");
+      Swal.fire(
+        "Todos los productos han sido eliminados del carrito",
+        "",
+        "success"
+      );
       localStorage.removeItem("carrito");
       actualizarContenidoCarrito();
       actualizarEstadoBotonComprar();
-      actualizarContadorProductos(); 
+      actualizarContadorProductos();
     } else {
       Swal.fire("Operación cancelada", "", "info");
     }
@@ -93,7 +97,7 @@ async function alertEliminar(index) {
     carrito.splice(index, 1);
     localStorage.setItem("carrito", JSON.stringify(carrito));
     await actualizarContenidoCarrito();
-    actualizarEstadoBotonComprar(); 
+    actualizarEstadoBotonComprar();
   } else if (result.isDenied) {
     Swal.fire("No se eliminó el producto", "", "info");
   }
@@ -154,47 +158,39 @@ export async function fetchProducts(url) {
             </div>
         </div>
         
-        <div class="modal fade" id="modalId${i}">
-        <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
-            <div class="modal-content">
-            <div class="d-flex justify-content-end">
-            <button type="button" class="close custom-close" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        <div class="modal fade fixed-size-modal" id="modalId${i}">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <div class="contenedor">
+                <h5 class="modal-title">${response[i].title}</h5>
+                <button type="button" class="btn-close close custom-close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
             </div>
             <div class="modal-body">
-                <div class="row mt-2 p-3">
-            
+              <div class="row">
                 <div class="col-md-6">
-                    <img src="${
-                      response[i].image
-                    }" width="100%" height="280px" class="rounded" alt="Imagen del producto">
+                  <img src="${
+                    response[i].image
+                  }" class="img-fluid rounded" alt="Imagen del producto">
                 </div>
-                <div class="modal-header pb-2">
-                <h5 class="modal-title" id="exampleModalLabel">${
-                  response[i].title
-                }</h5>
-                
+                <div class="col-md-6 content-right">
+                  <p class="card-text text-dark text-justify">${
+                    response[i].description
+                  }</p>
+                  <p class="price card-text text-success">$${response[i].price}</p>
+                  <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
+                    response[i].id
+                  }">Agregar al carrito</a>
+                </div>
+              </div>
             </div>
-                <div class="col-md-6"></div>
-                <p class="card-text text-dark text-justify">${
-                  response[i].description
-                }</p>
-                <div class="col-md-6">
-                    <p class="card-text text-success">$ ${response[i].price}</p>
-                </div>
-                
-                <div class="col-md-6">
-                    <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
-                      response[i].id 
-                    }">Agregar al carrito</a>
-                </div>
-                </div>
-            </div>
-            </div>
+          </div>
         </div>
-        </div>
-        
+      </div>
+      
     `;
   }
 }
@@ -217,7 +213,7 @@ function agregarEventosModificarCantidad() {
       }
       localStorage.setItem("carrito", JSON.stringify(carrito));
       await actualizarContenidoCarrito();
-      actualizarEstadoBotonComprar(); 
+      actualizarEstadoBotonComprar();
     });
   });
 }
@@ -243,10 +239,13 @@ function agregarEventosEliminarProducto() {
 
 export async function agregarAlCarrito(producto) {
   let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-  const productoExistenteIndex = carrito.findIndex((item) => item.id === producto.id);
+  const productoExistenteIndex = carrito.findIndex(
+    (item) => item.id === producto.id
+  );
   if (productoExistenteIndex !== -1) {
     carrito[productoExistenteIndex].cantidad += 1;
-    carrito[productoExistenteIndex].precioTotal = carrito[productoExistenteIndex].cantidad * producto.price;
+    carrito[productoExistenteIndex].precioTotal =
+      carrito[productoExistenteIndex].cantidad * producto.price;
   } else {
     carrito.push({
       id: producto.id,
@@ -260,9 +259,37 @@ export async function agregarAlCarrito(producto) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// Función para cambiar el fondo del slider según el tamaño de la pantalla
+function changeSliderBackground() {
+  var screenWidth = window.innerWidth;
+
+  if (screenWidth < 768) {
+    // Pantalla pequeña
+    document.querySelectorAll(".carousel-item").forEach(function (item, index) {
+      item.style.backgroundImage =
+        "url('/img/slider" + (index + 1) + "-small.png')";
+    });
+  } else if (screenWidth < 992) {
+    // Pantalla mediana
+    document.querySelectorAll(".carousel-item").forEach(function (item, index) {
+      item.style.backgroundImage =
+        "url('/img/slider" + (index + 1) + "-medium.png')";
+    });
+  } else {
+    // Pantalla grande
+    document.querySelectorAll(".carousel-item").forEach(function (item, index) {
+      item.style.backgroundImage =
+        "url('/img/slider" + (index + 1) + "-large.png')";
+    });
+  }
+}
+
+// Llama a la función al cargar la página y al cambiar el tamaño de la pantalla
+window.addEventListener("load", changeSliderBackground);
+window.addEventListener("resize", changeSliderBackground);
+
 const botonComprar = document.getElementById("btn-comprar");
 const btnEliminarTodo = document.getElementById("btn-eliminar");
-
 
 function carritoEstaVacio() {
   const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
