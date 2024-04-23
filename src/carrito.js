@@ -180,7 +180,9 @@ export async function fetchProducts(url) {
                   <p class="card-text text-dark text-justify">${
                     response[i].description
                   }</p>
-                  <p class="price card-text text-success">$${response[i].price}</p>
+                  <p class="price card-text text-success">$${
+                    response[i].price
+                  }</p>
                   <a href="#" class="btn btn-dark btn-block agregar-carrito-modal" data-product-id="${
                     response[i].id
                   }">Agregar al carrito</a>
@@ -259,9 +261,32 @@ export async function agregarAlCarrito(producto) {
   localStorage.setItem("carrito", JSON.stringify(carrito));
 }
 
+// Función para cambiar el fondo del slider según el tamaño de la pantalla
+function changeSliderBackground() {
+  var screenWidth = window.innerWidth;
 
+  if (screenWidth < 768) {
+    // Pantalla pequeña
+    document.querySelectorAll(".carousel-item").forEach(function (item, index) {
+      item.style.backgroundImage =
+        "url('./img/slider" + (index + 1) + "-small.png')";
+    });
+  } else if (screenWidth < 992) {
+    // Pantalla mediana
+    document.querySelectorAll(".carousel-item").forEach(function (item, index) {
+      item.style.backgroundImage =
+        "url('./img/slider" + (index + 1) + "-medium.png')";
+    });
+  } else {
+    // Pantalla grande
+    document.querySelectorAll(".carousel-item").forEach(function (item, index) {
+      item.style.backgroundImage =
+        "url('./img/slider" + (index + 1) + "-large.png')";
+    });
+  }
+}
 
-// Llama a la función al cargar la página y al cambiar el tamaño de la pantalla
+/* // Llama a la función al cargar la página y al cambiar el tamaño de la pantalla */
 window.addEventListener("load", changeSliderBackground);
 window.addEventListener("resize", changeSliderBackground);
 
