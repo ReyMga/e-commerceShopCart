@@ -73,7 +73,7 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
   gap: 2rem;
-  padding: 0px 29px 3px;
+  padding: 0px 60px 3px;
   margin-top: 45px;
 }
 
@@ -478,5 +478,19 @@ div.offcanvas-body {
   }
   .carousel-item:nth-of-type(3) {
     background-image: url("/img/slider3-large.jpg");
+  }
+}
+
+
+@media (max-width: 767px) {
+  .productos {
+    grid-template-columns: repeat(1, minmax(0, 1fr)); 
+    padding: 0 26px 15px; 
+    gap: 1rem; 
+  }
+
+  .modal-content{
+    width: 300px;
+    margin: auto;
   }
 }

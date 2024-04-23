@@ -142,7 +142,7 @@ export async function fetchProducts(url) {
   for (let i = 0; i < response.length; i++) {
     let title = response[i].title;
     products.innerHTML += `    
-        <div class="card" style="width: 26rem; height:36rem">
+        <div class="card" >
             <img src="${
               response[i].image
             }" class="card-img-top" alt="..." data-target="#modalId${i}">
