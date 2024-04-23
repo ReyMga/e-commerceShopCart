@@ -166,22 +166,13 @@ body {
   margin-bottom: 20px;
 }
 
-.content-right{
-  margin-top: 35px!important;
+.content-right {
+  margin-top: 35px !important;
 }
-
-/* .custom-close {
-  position: absolute;
-  top: 50%;
-  right: 1rem;
-  transform: translateY(-50%);
-} */
 
 .modal-content {
   transform: scaleX(1.1);
-
 }
-
 
 .modal-header h1 {
   font-size: 24px;
@@ -252,11 +243,11 @@ body {
   margin-top: 20px;
 }
 
-.modal-header{
+.modal-header {
   display: block;
 }
 
-.contenedor{
+.contenedor {
   display: flex;
   justify-content: space-between;
 }
@@ -266,7 +257,7 @@ body {
   justify-content: space-between;
 }
 
-.modal-title{
+.modal-title {
   font-size: 20px;
 }
 
@@ -421,21 +412,21 @@ hr.message-inner-separator {
 }
 
 .fixed-size-modal .modal-dialog {
-  max-width: 600px; 
-  width: 100%; 
+  max-width: 600px;
+  width: 100%;
 }
 
-.price{
+.price {
   color: black !important;
   font-size: 24px;
-  font-weight: 400
+  font-weight: 400;
 }
 
 .collapse {
   margin-right: 40px;
 }
 
-.navbar-collapse{
+.navbar-collapse {
   flex-grow: 0;
 }
 
@@ -456,36 +447,36 @@ div.offcanvas-body {
 
 @media (max-width: 767px) {
   .carousel-item:nth-of-type(1) {
-    background-image: url('/img/slider1-small.jpg');
+    background-image: url("/img/slider1-small.jpg");
   }
   .carousel-item:nth-of-type(2) {
-    background-image: url('/img/slider2-small.jpg');
+    background-image: url("/img/slider2-small.jpg");
   }
   .carousel-item:nth-of-type(3) {
-    background-image: url('/img/slider3-small.jpg');
+    background-image: url("/img/slider3-small.jpg");
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   .carousel-item:nth-of-type(1) {
-    background-image: url('/img/slider1-medium.jpg');
+    background-image: url("/img/slider1-medium.jpg");
   }
   .carousel-item:nth-of-type(2) {
-    background-image: url('/img/slider2-medium.jpg');
+    background-image: url("/img/slider2-medium.jpg");
   }
   .carousel-item:nth-of-type(3) {
-    background-image: url('/img/slider3-medium.jpg');
+    background-image: url("/img/slider3-medium.jpg");
   }
 }
 
 @media (min-width: 992px) {
   .carousel-item:nth-of-type(1) {
-    background-image: url('/img/slider1-large.jpg');
+    background-image: url("/img/slider1-large.jpg");
   }
   .carousel-item:nth-of-type(2) {
-    background-image: url('/img/slider2-large.jpg');
+    background-image: url("/img/slider2-large.jpg");
   }
   .carousel-item:nth-of-type(3) {
-    background-image: url('/img/slider3-large.jpg');
+    background-image: url("/img/slider3-large.jpg");
   }
 }
